@@ -212,9 +212,9 @@
     var xAxis = d3.svg.axis()
       .scale(timeScale)
       .orient('bottom')
-      .ticks(d3.time.monday)
+      .ticks(d3.time.month,3)
       .tickSize(-h + topPadding + 20, 0, 0)
-      .tickFormat(d3.time.format('%b %d'));
+      .tickFormat(d3.time.format('%b %y'));
 
     // Draw vertical grid
     var xAxisGroup = svg.append('g')
@@ -306,72 +306,72 @@
       .attr("fill", "#000")
       .style("pointer-events", "none");
 
-    // Draw vertical mouse helper
-    var verticalMouse = svg.append("line")
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", 0)
-      .attr("y2", 0)
-      .style("stroke", "black")
-      .style("stroke-width", "1px")
-      .style("stroke-dasharray", "2,2")
-      .style("shape-rendering", "crispEdges")
-      .style("pointer-events", "none")
-      .style("display", "none");
+    //// Draw vertical mouse helper
+    //var verticalMouse = svg.append("line")
+    //  .attr("x1", 0)
+    //  .attr("y1", 0)
+    //  .attr("x2", 0)
+    //  .attr("y2", 0)
+    //  .style("stroke", "black")
+    //  .style("stroke-width", "1px")
+    //  .style("stroke-dasharray", "2,2")
+    //  .style("shape-rendering", "crispEdges")
+    //  .style("pointer-events", "none")
+    //  .style("display", "none");
 
-    var verticalMouseBox = svg.append("rect")
-      .attr("rx", 3)
-      .attr("ry", 3)
-      .attr("width", 50)
-      .attr("height", barHeight)
-      .attr("stroke", "none")
-      .attr("fill", "black")
-      .attr("fill-opacity", 0.8)
-      .style("display", "none");
+    //var verticalMouseBox = svg.append("rect")
+    //  .attr("rx", 3)
+    //  .attr("ry", 3)
+    //  .attr("width", 50)
+    //  .attr("height", barHeight)
+    //  .attr("stroke", "none")
+    //  .attr("fill", "black")
+    //  .attr("fill-opacity", 0.8)
+    //  .style("display", "none");
 
-    var verticalMouseText = svg.append("text")
-      .attr("font-size", 11)
-      .attr("font-weight", "bold")
-      .attr("text-anchor", "middle")
-      .attr("text-height", barHeight)
-      .attr("fill", "white")
-      .style("display", "none");
+    //var verticalMouseText = svg.append("text")
+    //  .attr("font-size", 11)
+    //  .attr("font-weight", "bold")
+    //  .attr("text-anchor", "middle")
+    //  .attr("text-height", barHeight)
+    //  .attr("fill", "white")
+    //  .style("display", "none");
 
-    var verticalMouseTopPadding = 40;
+    //var verticalMouseTopPadding = 40;
 
-    svg.on("mousemove", function () {
-      var xCoord = d3.mouse(this)[0],
-          yCoord = d3.mouse(this)[1];
+    //svg.on("mousemove", function () {
+    //  var xCoord = d3.mouse(this)[0],
+    //      yCoord = d3.mouse(this)[1];
 
-      if (xCoord > sidePadding) {
-        verticalMouse
-            .attr("x1", xCoord)
-            .attr("y1", topPadding - 10)
-            .attr("x2", xCoord)
-            .attr("y2", h - 30)
-            .style("display", "block");
+    //  if (xCoord > sidePadding) {
+    //    verticalMouse
+    //        .attr("x1", xCoord)
+    //        .attr("y1", topPadding - 10)
+    //        .attr("x2", xCoord)
+    //        .attr("y2", h - 30)
+    //        .style("display", "block");
 
-        verticalMouseBox
-            .attr("x", xCoord - 25)
-            .attr("y", yCoord - (barHeight + 8) / 2 + verticalMouseTopPadding)
-            .style("display", "block");
+    //    verticalMouseBox
+    //        .attr("x", xCoord - 25)
+    //        .attr("y", yCoord - (barHeight + 8) / 2 + verticalMouseTopPadding)
+    //        .style("display", "block");
 
-        verticalMouseText
-            .attr("transform", "translate(" + xCoord + "," + (yCoord + verticalMouseTopPadding) + ")")
-            .text(d3.time.format('%b %d')(timeScale.invert(xCoord - sidePadding)))
-            .style("display", "block");
-      } else {
-        verticalMouse.style("display", "none");
-        verticalMouseBox.style("display", "none");
-        verticalMouseText.style("display", "none");
-      }
-    });
+    //    verticalMouseText
+    //        .attr("transform", "translate(" + xCoord + "," + (yCoord + verticalMouseTopPadding) + ")")
+    //        .text(d3.time.format('%b %d')(timeScale.invert(xCoord - sidePadding)))
+    //        .style("display", "block");
+    //  } else {
+    //    verticalMouse.style("display", "none");
+    //    verticalMouseBox.style("display", "none");
+    //    verticalMouseText.style("display", "none");
+    //  }
+    //});
 
-    svg.on("mouseleave", function() {
-      verticalMouse.style("display", "none");
-      verticalMouseBox.style("display", "none");
-      verticalMouseText.style("display", "none");
-    });
+    //svg.on("mouseleave", function() {
+    //  verticalMouse.style("display", "none");
+    //  verticalMouseBox.style("display", "none");
+    //  verticalMouseText.style("display", "none");
+    //});
 
     return {
       sidePadding: sidePadding
